@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Government-scholarship-bc</title>
+   <!-- ... your meta tags and title ... -->
+    <link rel="stylesheet" href="style1.css">
+<style>
+table, td, th {  
+  border: 1px solid #000; /* Change border color to black (you can use any color you prefer) */
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+#inputFormModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1000; 
+}
+</style>
+</head>
+<body>
+ <table>
+        
+            <tr>
+                <th>Scholarship Name</th>
+                <th>Link</th>
+                <th>Eligibility</th>
+                <th>Award</th>
+            </tr>
+            <tr>
+                <td>Post-Matric OBC Scholarship  </td>
+                <td><a class="f"  href="http://www.pmsonline.bih.nic.in/pmsedu/(S(10npufkjwjbsiva12c1chhzm))/pms/Default.aspx" target="_blank">Post Matric OBC</a></td>
+                <td>SC students studying at post matriculation or post-secondary stage</td>
+                <td>varies </td>
+            </tr>
+            <tr>
+                <td>Central Sector Scholarship Scheme of Top Class Education for SC Students</td>
+                <td><a class="f" href="https://tcs.dosje.gov.in/" target="_blank">Central Sector</a></td>
+                <td>Full tuition fees, living expenses, books, and a computer</td>
+                <td> Meritorious SC students pursuing higher education in notified institutes of excellence</td>
+            </tr>
+             <tr>
+                <td>Rajiv Gandhi National Fellowship</td>
+                <td><a class="f" href="https://rgnf.ugc.ac.in/" target="_blank">Rajiv Gandhi National</a></td>
+                <td>SC students pursuing higher studies</td>
+                <td>varies</td>
+            </tr>
+             <tr>
+                <td>National Overseas scholarship</td>
+                <td><a class="f"  href="https://socialjustice.gov.in/schemes/28" target="_blank">National Overseas</a></td>
+                <td>ST students pursuing higher studies abroad</td>
+                <td>varies INR 20,000 to INR 28,000 per annum</td>
+            </tr>
+            <tr>
+                <td>P.G. Scholarship Scheme for SC/ST Students  </td>
+                <td><a class="f"   href="https://www.indiascienceandtechnology.gov.in/nurturing-minds/scholarships/post-graduation/pg-scholarship-scst-students-pursuing-professional" target="_blank">P.G</a></td>
+                <td>Students pursuing postgraduate level studies in professional subjects.</td>
+                <td>INR 7,800 per month</td>
+            </tr>
+             <tr>
+                <td>Pre-Matric Scholarship for S.C. Students </td>
+                <td><a class="f"  href="https://www.getmyuni.com/scholarships/category" target="_blank">Pre-Matric</a></td>
+                <td>Students of class 9 to 10 belonging to the S.C. community.</td>
+                <td>INR 525 per month</td>
+            </tr>
+             <tr>
+                <td>Kishore Vaigyanik Protsahan Yojana Scholarship 2023</td>
+                <td><a class="f"  href="https://tribal.nic.in/ScholarshiP.aspx" target="_blank">KVPYS2023</a></td>
+                <td>ST category students aspiring to pursue MPhil or Ph.D.</td>
+                <td>INR 28,000.</td>
+            </tr>
+    </table>
+</body>
+<body>
+    <header>
+        <h2 class="Logo">MVM Scholarship</h2>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Types of Scholarship</button>
+                <div class="dropdown-content">
+                    <div class="sub-menu">
+                        <button class="sub-btn">Government</button>
+                        <div class="sub-content">
+                            <a href="government-scholarships.html">All Categories</a>
+                            <a href="government-scholarships-sc-st.html">SC/ST</a>
+                            <a href="government-scholarships-bc.html">BC</a>
+                            <a href="government-scholarships-oc.html">OC</a>
+                        </div>
+                    </div>
+                    <div class="sub-menu">
+                        <button class="sub-btn">Private</button>
+                        <div class="sub-content">
+                            <a href="private-scholarships.html">All Categories</a>
+                            <a href="private-scholarships-management.html">Management</a>
+                            <a href="private-scholarships-merit.html">Merit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="contact.html">Contact</a>
+            <a href="auth.html">show data</a>
+        </nav>
+    </header>
+     <!-- FORM RA SWAMI -->
+     <div id="inputFormModal">
+        <form id="inputForm">
+            <label for="email">Email:</label>
+            <input type="text" name="email" required><br><br>
+
+            <label for="name">Name:</label>
+            <input type="text" name="name" required><br><br>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="number" name="phoneNumber" required><br><br>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required><br><br>
+
+            <label for="branch">Branch:</label>
+            <input type="text" name="branch" required><br><br>
+
+            <label for="roll">Roll Number:</label>
+            <input type="text" name="roll" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        const links = document.querySelectorAll('a.f');
+        const modal = document.getElementById('inputFormModal');
+        const form = document.getElementById('inputForm');
+
+        links.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                modal.style.display = 'block';
+
+                form.onsubmit = async (e) => {
+                    e.preventDefault();
+
+                    const formData = new URLSearchParams(new FormData(form)).toString();
+                    const response = await fetch('/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: formData
+                    });
+                    
+
+                    if (response.ok) {
+                        modal.style.display = 'none';
+                        window.location.href = link.href;
+                    } else {
+                        alert('Error submitting data. Please try again.');
+                    }
+                };
+            });
+        });
+    </script>
+</body>
+</html>

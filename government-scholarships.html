@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Government-scholarship</title>
+   <!-- ... your meta tags and title ... -->
+    <link rel="stylesheet" href="style1.css">
+<style>
+table, td, th {  
+  border: 1px solid #000; /* Change border color to black (you can use any color you prefer) */
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+#inputFormModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1000; 
+}
+</style>
+</head>
+<body>
+ <table>
+        
+            <tr>
+                <th>Scholarship Name</th>
+                <th>Link</th>
+                <th>Eligibility</th>
+                <th>Award</th>
+            </tr>
+           <tr>
+                <td>Post Matric Scholarship </td>
+                <td><a class="f"  href="http://www.pmsonline.bih.nic.in/pmsedu/(S(10npufkjwjbsiva12c1chhzm))/pms/Default.aspx" target="_blank">Post Matric</a></td>
+                <td>OBC students studying at post matriculation or post-secondary stage</td>
+                <td> varies</td>
+            </tr>
+            <tr>
+                <td>OBC Pre-Matric Scholarship </td>
+                <td><a class="f"  href="https://bcdd.kerala.gov.in/en/schemes/educational-schemes/obc-prematric-scholarship/" target="_blank">OBC Pre_Matric</a></td>
+                <td>OBC students studying in classes 1 to 10</td>
+                <td>INR 1,2400 per month</td>
+            </tr>
+            <tr>
+                <td>National Fellowship for OBC3</td>
+                <td><a class="f"  href="https://nfobc.ugc.ac.in/default.aspx" target="_blank">National Fellowship</a></td>
+                <td>OBC category students who have passed their postgraduate exams.</td>
+                <td>INR 35,000 per month</td>
+            </tr>
+            
+    </table>
+</body>
+<body>
+    <header>
+        <h2 class="Logo">MVM Scholarship</h2>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Types of Scholarship</button>
+                <div class="dropdown-content">
+                    <div class="sub-menu">
+                        <button class="sub-btn">Government</button>
+                        <div class="sub-content">
+                            <a href="government-scholarships.html">All Categories</a>
+                            <a href="government-scholarships-sc-st.html">SC/ST</a>
+                            <a href="government-scholarships-bc.html">BC</a>
+                            <a href="government-scholarships-oc.html">OC</a>
+                        </div>
+                    </div>
+                    <div class="sub-menu">
+                        <button class="sub-btn">Private</button>
+                        <div class="sub-content">
+                            <a href="private-scholarships.html">All Categories</a>
+                            <a href="private-scholarships-management.html">Management</a>
+                            <a href="private-scholarships-merit.html">Merit</a>
+                        </div>
+                    </div>
+                </div>
+             <a href="contact.html">Contact</a>
+             <a href="login.html">show data</a>
+        </nav>
+    </header>
+        <!-- FORM RA SWAMI -->
+        <div id="inputFormModal">
+            <form id="inputForm">
+                <label for="email">Email:</label>
+                <input type="text" name="email" required><br><br>
+    
+                <label for="name">Name:</label>
+                <input type="text" name="name" required><br><br>
+    
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="number" name="phoneNumber" required><br><br>
+    
+                <label for="age">Age:</label>
+                <input type="number" name="age" required><br><br>
+    
+                <label for="branch">Branch:</label>
+                <input type="text" name="branch" required><br><br>
+    
+                <label for="roll">Roll Number:</label>
+                <input type="text" name="roll" required><br><br>
+    
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    
+        <script>
+            const links = document.querySelectorAll('a.f');
+            const modal = document.getElementById('inputFormModal');
+            const form = document.getElementById('inputForm');
+    
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    modal.style.display = 'block';
+    
+                    form.onsubmit = async (e) => {
+                        e.preventDefault();
+    
+                        const formData = new URLSearchParams(new FormData(form)).toString();
+                        const response = await fetch('/submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: formData
+                        });
+                        
+    
+                        if (response.ok) {
+                            modal.style.display = 'none';
+                            window.location.href = link.href;
+                        } else {
+                            alert('Error submitting data. Please try again.');
+                        }
+                    };
+                });
+            });
+        </script>
+</body>
+</html>
